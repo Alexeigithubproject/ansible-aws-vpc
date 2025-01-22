@@ -19,7 +19,7 @@
     - debug:
         var: vpcout
 
-    
+    #Create Public Subnets
 
     - name: Create Public Subnet 1 in Zone1
       ec2_vpc_subnet:
@@ -57,6 +57,7 @@
           Name: PubSub3
       register: pubsub3_out
 
+    #Create Private Subnets
 
     - name: Create Private Subnet 1 in Zone1
       ec2_vpc_subnet:
@@ -91,6 +92,8 @@
           Name: PrivSub3
       register: privsub3_out
 
+   #Create Internet Gateway
+
     - name: Internet Gateway setup
       ec2_vpc_igw:
         vpc_id: "{{ vpcout.vpc.id }}"
@@ -100,6 +103,8 @@
         tags:
           Name: igw_vprofile
       register: igwout
+
+    #Public Subnet Route Table
 
     - name: Set up public subnet route table
       ec2_vpc_route_table:
@@ -116,6 +121,8 @@
           gateway_id: "{{ igwout.gateway_id }}"
       register: pubRT_out
 
+   # NAT Gateway
+
     - name: Create new nat gateway and allocate new EIP if a nat gateway does not yet exist in the subnet.
       ec2_vpc_nat_gateway:
         state: "{{ state }}"
@@ -127,6 +134,8 @@
 
     - debug:
         var: natgw_out
+
+    #Private Subnet Route Table
 
     - name: Set up private subnet route table
       ec2_vpc_route_table:
@@ -144,6 +153,24 @@
             gateway_id: "{{ natgw_out.nat_gateway_id }}"
       register: privRT_out
 
+
+    - debug: 
+        var: "{{item}}"
+      loop:
+        - vpcout.vpc.id
+        - pubsub1_out.subnet.id
+        - pubsub2_out.subnet.id
+        - pubsub3_out.subnet.id
+        - privsub1_out.subnet.id
+        - privsub2_out.subnet.id
+        - privsub3_out.subnet.id
+        - igwout.gateway_id
+        - pubRT_out.route_table.id
+        - natgw_out.nat_gateway_id
+        - privRT_out.route_table.id
+        
+
+        
 
 
       
