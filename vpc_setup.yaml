@@ -25,7 +25,7 @@
         az: "{{zone1}}"
         state: "{{state}}"
         vpc_id: "{{vpcout}}"
-        cidr: "{{subSub1Cidr}}"
+        cidr: "{{PubSub1Cidr}}"
         map_public: yes
         tags:
           Name: PubSub1
