@@ -1,7 +1,7 @@
 vpcid: vpc-0c15e060424c498f9
 pubsub1id: subnet-059fa5236cf5a9524
-pubsub2id: subnet-059fa5236cf5a9524
-pubsub3id: subnet-059fa5236cf5a9524
+pubsub2id: subnet-0178bb39ea02dcc2c
+pubsub3id: subnet-0f9c907a58efada1d
 privsub1id: subnet-0857283884e55de12
 privsub1id: subnet-01d7b1b1264209fea
 privsub1id: subnet-04521cd4e499030fb
