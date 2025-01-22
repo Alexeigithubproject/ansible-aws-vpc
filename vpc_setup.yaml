@@ -16,6 +16,9 @@
         state: "{{state}}"
       register: vpcout
 
+    - debug:
+        var: vpcout
+
     
 
     - name: Create Public Subnet 1 in Zone1
@@ -29,13 +32,5 @@
         tags:
           Name: PubSub1
       register: pubsub1_out
-
-    - debug:                
-        msg:
-         - "Region: {{ region }}"
-         - "Zone1: {{ zone1 }}"
-         - "State: {{ state }}"
-         - "VPC ID: {{ vpcout }}"
-         - "CIDR: {{ PubSub1Cidr }}"
 
        
