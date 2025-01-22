@@ -65,7 +65,6 @@
         az: "{{ zone1 }}"
         state: "{{ state }}"
         cidr: "{{ PrivSub1Cidr }}"
-        map_public: yes
         tags:
           Name: PrivSub1
       register: privsub1_out
@@ -77,7 +76,6 @@
         az: "{{ zone2 }}"
         state: "{{ state }}"
         cidr: "{{ PrivSub2Cidr }}"
-        map_public: yes
         tags:
           Name: PrivSub2
       register: privsub2_out
@@ -89,7 +87,6 @@
         az: "{{ zone3 }}"
         state: "{{ state }}"
         cidr: "{{ PrivSub3Cidr }}"
-        map_public: yes
         tags:
           Name: PrivSub3
       register: privsub3_out
