@@ -44,6 +44,7 @@
         region: "{{ region }}"
         instance_type: t2.micro
         image_id: "{{ bastion_ami }}"
+        subnet_id: "{{ pubsub1id }}"
         wait: yes
         wait_timeout: 300
         tags:
