@@ -52,7 +52,7 @@
           Owner: AlexDevOps
         security_group: "{{ BastionSG_out.group_id }}"
       register: bastionHost_out
-      when: bastion_instance_info.instances | length == 0
+      #when: bastion_instance_info.instances | length == 0
 
     - name: Debug output of ec2_instance_info
       debug:
