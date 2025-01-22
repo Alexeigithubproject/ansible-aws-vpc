@@ -12,7 +12,7 @@
 
     - name: Create ec2 key
       ec2_key:
-        name: bastion-key.pem
+        name: bastion-key
         region: "{{ region }}"
       register: keyout
 
@@ -21,7 +21,7 @@
       copy:
         content: "{{ keyout.key.private_key }}"
         dest: "/home/ubuntu/ansible-aws-vpc/bastion-key.pem"
-        mode: 0600
+        mode: 0400
       when: keyout.changed
     
     - name: Create Sec Grp for bastion host
@@ -40,7 +40,7 @@
 
     - name: Create Bastion host
       ec2_instance:
-        key_name: "{{ keyout }}"
+        key_name: bastion-key
         region: "{{ region }}"
         instance_type: t2.micro
         image_id: "{{ bastion_ami }}"
