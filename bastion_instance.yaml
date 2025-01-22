@@ -49,10 +49,6 @@
           Name: vprofile
           Project: vprofile
           Owner: AlexDevOps
-        exact_count: 1
-        count_tag:
-          Name: vprofile
-          Project: vprofile
-          Owner: AlexDevOps
-        groups: "{{ BastionSG_out.group_id }}"
+        security_group: "{{ BastionSG_out.group_id }}"
       register: bastionHost_out
+      when: bastion_instance_info.instances | length == 0
