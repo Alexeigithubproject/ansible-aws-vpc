@@ -43,7 +43,7 @@
         map_public: yes
         tags:
           Name: PubSub2
-      register: pubsub1_out
+      register: pubsub2_out
 
     - name: Create Public Subnet 2 in Zone2
       ec2_vpc_subnet:
@@ -55,7 +55,7 @@
         map_public: yes
         tags:
           Name: PubSub3
-      register: pubsub1_out
+      register: pubsub3_out
 
 
     - name: Create Private Subnet 1 in Zone1
@@ -98,8 +98,23 @@
         state: "{{ state }}"
         force_attach: yes
         tags:
-         Name: igw_vprofile
+          Name: igw_vprofile
       register: igwout
+
+    - name: Set up public subnet route table
+      ec2_vpc_route_table:
+        vpc_id: "{{ vpcout.vpc.id }}"
+        region: "{{ region }}"
+        tags:
+          Name: public_RT
+        subnets:
+          - "{{ pubsub1_out.subnet.id }}"
+          - "{{ pubsub2_out.subnet.id }}"
+          - "{{ pubsub3_out.subnet.id }}"
+        routes:
+        - dest: 0.0.0.0/0
+          gateway_id: "{{ igwout.gateway_id }}"
+      register: pubRT_out
 
 
 
