@@ -42,7 +42,7 @@
         cidr: "{{ PubSub2Cidr }}"
         map_public: yes
         tags:
-          Name: PubSub1
+          Name: PubSub2
       register: pubsub1_out
 
     - name: Create Public Subnet 2 in Zone2
@@ -54,7 +54,7 @@
         cidr: "{{ PubSub3Cidr }}"
         map_public: yes
         tags:
-          Name: PubSub1
+          Name: PubSub3
       register: pubsub1_out
 
        
