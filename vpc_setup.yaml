@@ -26,11 +26,11 @@
 
     - name: Create Public Subnet 1 in Zone1
       amazon.aws.ec2_vpc_subnet:
-        region: "{{region}}"
-        az: "{{zone1}}"
-        state: "{{state}}"
-        vpc_id: "{{vpcout}}"
-        cidr: "{{PubSub1Cidr}}"
+        vpc_id: "{{ vpcout }}"
+        region: "{{ region }}"
+        az: "{{ zone1 }}"
+        state: "{{ state }}"
+        cidr: "{{ PubSub1Cidr }}"
         map_public: yes
         tags:
           Name: PubSub1
