@@ -65,7 +65,9 @@
           Owner: AlexDevOps
         security_group: "{{ BastionSG_out.group_id }}"
       register: bastionHost_out
-      when: bastion_instance_info.instances | selectattr('state.name', 'not in', ['terminated', 'pending']) | list | length == 0
+      when: 
+        - bastion_instance_info.instances | length == 0
+        - bastion_instance_info.instances | selectattr('state.code', 'neq', 0) | selectattr('state.code', 'neq', 16) | selectattr('state.code', 'neq', 48) | selectattr('state.code', 'neq', 64) | selectattr('state.code', 'neq', 80) | list | length > 0
       
 
     
