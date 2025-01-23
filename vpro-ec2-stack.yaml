@@ -180,21 +180,21 @@
             load_balancer_port: 80
             instance_port: 80
 
-      - name: Insert/Update Hosts IP & Name in file
-        blockinfile:
-        path: provision-stack/group_vars/hostip
-        block: |
-         web01_ip: {{ web01_out.tagged_instance[0].private_ip }}
-         db01_ip: {{ db01_out.tagged_instance[0].private_ip }}
-         app01_ip: {{ app01_out.tagged_instance[0].private_ip }}
-         rmq01_ip: {{ rmq01_out.tagged_instance[0].private_ip }}
-         mc01_ip: {{ mc01_out.tagged_instance[0].private_ip }}
+    - name: Insert/Update Hosts IP & Name in file
+      blockinfile:
+      path: provision-stack/group_vars/hostip
+      block: |
+        web01_ip: {{ web01_out.tagged_instance[0].private_ip }}
+        db01_ip: {{ db01_out.tagged_instance[0].private_ip }}
+        app01_ip: {{ app01_out.tagged_instance[0].private_ip }}
+        rmq01_ip: {{ rmq01_out.tagged_instance[0].private_ip }}
+        mc01_ip: {{ mc01_out.tagged_instance[0].private_ip }}
 
 
 
-      - name: Save private key into file vprokey.pem
-        copy:
-          src: vprokey.pem
-          dest: "/home/ubuntu/provision-stack/vprokey.pem"
-          mode: 0400
-        when: vprokey_out.changed
+    - name: Save private key into file vprokey.pem
+      copy:
+        src: vprokey.pem
+        dest: "/home/ubuntu/provision-stack/vprokey.pem"
+        mode: 0400
+      when: vprokey_out.changed
