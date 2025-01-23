@@ -57,4 +57,4 @@
 
     - name: Debug output of ec2_instance_info
       debug:
-        var: bastion_instance_info
+        var: bastionHost_out
