@@ -37,6 +37,18 @@
           cidr_ip: "{{ MYIP }}"
       register: BastionSG_out
       
+    - name: Check if Bastion host already exists
+      ec2_instance_info:
+        filters:
+          "tag:Name": "vprofile"
+          "tag:Project": "vprofile"
+          "tag:Owner": "AlexDevOps"
+        region: "{{ region }}"
+      register: bastion_instance_info
+
+    - name: Debug output of ec2_instance_info
+      debug:
+        var: bastion_instance_info.instances
 
     - name: Create Bastion host
       ec2_instance:
@@ -53,8 +65,7 @@
           Owner: AlexDevOps
         security_group: "{{ BastionSG_out.group_id }}"
       register: bastionHost_out
+      when: bastion_instance_info.instances | length == 0
       
 
-    - name: Debug output of ec2_instance_info
-      debug:
-        var: bastionHost_out
+    
