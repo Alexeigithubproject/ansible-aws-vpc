@@ -70,4 +70,93 @@
         - proto: tcp
           from_port: 22
           to_port: 22
-          group_id: "{{ vprostack_out.group_id }}"    
+          group_id: "{{ vprostack_out.group_id }}"
+
+
+    - name: Create Nginx web01
+      ec2_instance:
+        key_name: vprokey
+        region: "{{ region }}"
+        instance_type: t2.micro
+        image_id: "{{ nginx_ami }}"
+        subnet_id: "{{ privsub1id }}"
+        wait: yes
+        wait_timeout: 300
+        tags:
+          Name: "web01"
+          Project: vprofile
+          Owner: AlexDevOps
+        security_group: "{{ vprostack_out.group_id }}"
+      register: web01_out
+
+
+    - name: Create Nginx web01
+      ec2_instance:
+        key_name: vprokey
+        region: "{{ region }}"
+        instance_type: t2.micro
+        image_id: "{{ tomcat_ami }}"
+        subnet_id: "{{ privsub1id }}"
+        wait: yes
+        wait_timeout: 300
+        tags:
+          Name: "app01"
+          Project: vprofile
+          Owner: AlexDevOps
+        security_group: "{{ vprostack_out.group_id }}"
+      register: app01_out
+
+
+    - name: Create memcached mc01
+      ec2_instance:
+        key_name: vprokey
+        region: "{{ region }}"
+        instance_type: t2.micro
+        image_id: "{{ memcached_ami }}"
+        subnet_id: "{{ privsub1id }}"
+        wait: yes
+        wait_timeout: 300
+        tags:
+          Name: "mc01"
+          Project: vprofile
+          Owner: AlexDevOps
+        security_group: "{{ vprostack_out.group_id }}"
+      register: mc01_out
+
+
+    - name: Create Rabbitmq rmq01
+      ec2_instance:
+        key_name: vprokey
+        region: "{{ region }}"
+        instance_type: t2.micro
+        image_id: "{{ rmq_ami }}"
+        subnet_id: "{{ privsub1id }}"
+        wait: yes
+        wait_timeout: 300
+        tags:
+          Name: "rmq01"
+          Project: vprofile
+          Owner: AlexDevOps
+        security_group: "{{ vprostack_out.group_id }}"
+      register: rmq01_out
+
+
+    - name: Create Mysql db01
+      ec2_instance:
+        key_name: vprokey
+        region: "{{ region }}"
+        instance_type: t2.micro
+        image_id: "{{ musql_ami }}"
+        subnet_id: "{{ privsub1id }}"
+        wait: yes
+        wait_timeout: 300
+        tags:
+          Name: "rmq01"
+          Project: vprofile
+          Owner: AlexDevOps
+        security_group: "{{ vprostack_out.group_id }}"
+      register: db01_out
+
+
+    - debug:
+        var: db01_out
