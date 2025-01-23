@@ -1,0 +1,6 @@
+nginx_ami: ami-0cdd6d7420844683b
+tomcat_ami: ami-0cdd6d7420844683b
+memcached_ami: ami-0cdd6d7420844683b
+rmq_ami: ami-0cdd6d7420844683b
+musql_ami: ami-0cdd6d7420844683b
+
