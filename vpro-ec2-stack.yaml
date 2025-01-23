@@ -167,7 +167,7 @@
         name: "vprofile-elb"
         region: "{{region}}"
         state: "{{state}}"
-        instance_id:
+        instance_ids:
           - "{{ web01_out.instance_ids }}"
         purge_instance_ids: true
         security_group_ids: "{{ vprostack_out.group_id }}"
