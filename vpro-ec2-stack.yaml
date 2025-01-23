@@ -38,7 +38,7 @@
           from_port: 80
           to_port: 80
           cidr_ip: "{{ 0.0.0.0/0 }}"
-      register: LB_out
+      register: vproLB_out
 
     - name: Create security group for vprostack
       ec2_group:
@@ -52,6 +52,7 @@
           from_port: 80
           to_port: 80
           group_id: "{{ LB_out.group_id }}"
+
         - proto: tcp
           from_port: 22
           to_port: 22
