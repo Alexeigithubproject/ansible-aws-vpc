@@ -40,7 +40,7 @@
           cidr_ip: "{{ 0.0.0.0/0 }}"
       register: LB_out
 
-    - name: Create security_group for Load Balancer
+    - name: Create security group for vprostack
       ec2_group:
         name: vprostack-sg
         description: Allow port 22 from everywhere and all port within sg
@@ -51,12 +51,12 @@
         - proto: tcp
           from_port: 80
           to_port: 80
-          group_id: "{{ LB_out }}"
+          group_id: "{{ LB_out.group_id }}"
         - proto: tcp
           from_port: 22
           to_port: 22
           group_id: "{{ BastionSGid }}"          
-      register: LB_out
+      register: vprostack_out
 
     - name: Create security_group for Load Balancer
       ec2_group:
@@ -69,4 +69,4 @@
         - proto: tcp
           from_port: 22
           to_port: 22
-          group_id: "{{ LB_out.group_id }}"    
+          group_id: "{{ vprostack_out.group_id }}"    
