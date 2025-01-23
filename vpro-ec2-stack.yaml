@@ -51,7 +51,7 @@
         - proto: tcp
           from_port: 80
           to_port: 80
-          group_id: "{{ LB_out.group_id }}"
+          group_id: "{{ vproLB_out.group_id }}"
 
         - proto: tcp
           from_port: 22
