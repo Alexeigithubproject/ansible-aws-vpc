@@ -159,7 +159,7 @@
 
 
     - debug:
-        var: db01_out.tagged_instances[0].id
+        var: db01_out
 
 
     - local_action:
