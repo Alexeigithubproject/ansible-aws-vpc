@@ -53,8 +53,10 @@
           Owner: AlexDevOps
         security_group: "{{ BastionSG_out.group_id }}"
       register: bastionHost_out
+
+      
       
 
     - name: Debug output of ec2_instance_info
       debug:
-        var: bastion_instance_info
+        var: bastionHost_out
